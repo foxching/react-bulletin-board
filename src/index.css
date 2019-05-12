@@ -30,7 +30,7 @@ div.board {
 
 div.note {
     height: 150px;
-    width: 150px;
+    width: 164px;
     background-color: yellow;
     margin: 2px 0;
     position: relative;
@@ -78,7 +78,7 @@ div.board button {
 
 #add {
   background-color: #5cb85c;
-  height: 3em;
+  height: 2em;
 }
 
 #edit {
