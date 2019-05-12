@@ -5,7 +5,8 @@ import { FaSave } from 'react-icons/fa';
 
 class Note extends Component {
     state = {
-        editing:false
+        editing:false,
+        noteVal:this.props.note.note
     }
 
     edit =() => {
@@ -13,20 +14,29 @@ class Note extends Component {
     }
 
     save =(e) => {
-        alert('')
+        e.preventDefault();
+        const newText = e.target.elements.TextMessage.value
+        this.props.updateNote(newText, this.props.note)
+        this.setState({
+            editing:false
+        })
     }
 
-    remove =() => {
-        alert('removing...')
+    remove = () => {
+        this.props.deleteNote(this.props.note.id)
     }
 
+    onChange =(e) => {
+        this.setState({ noteVal:e.target.value })
+    }
+    
     renderForm = () => {
 
         return (
             <div className="note">
-                <form>
-                    <textarea ref={input => this._newText = input}/>
-                    <button onClick={this.save}><FaSave /></button>
+                <form onSubmit={this.save}>
+                    <textarea type="text" name="TextMessage" value={this.state.noteVal} onChange={this.onChange}/>
+                    <button type="submit" id="save"><FaSave /></button>
                 </form>
             </div>
 
@@ -37,7 +47,7 @@ class Note extends Component {
 
         return (
             <div className="note">
-                <p>{this.props.note.notes}</p>
+                <p>{this.props.note.note}</p>
                 <span>
                     <button id="edit" onClick={this.edit}><FaPen /></button>
                     <button id="remove" onClick={this.remove}><FaTrash /></button>
