@@ -7,6 +7,15 @@ class Board extends Component {
 	state ={
 		notes:[]
 	}
+	 
+    componentWillMount() {
+		if(this.props.count){
+			fetch(`https://baconipsum.com/api/?type=all-meat&sentences=${this.props.count}`)
+				.then(res => res.json())
+				.then(data => data[0].split('. ').foreach())
+		}
+		
+    }
 	addNote = (txt) => {
 		this.setState ( {
 			notes:[...this.state.notes, { id:uuid(), note:txt}]
