@@ -3,19 +3,26 @@ import Note from './Note'
 import {FaPlusCircle} from 'react-icons/fa'
 import uuid  from 'uuid'
 
+
+
 class Board extends Component {
 	state ={
 		notes:[]
 	}
-	 
-    componentWillMount() {
-		if(this.props.count){
+	
+	
+	componentWillMount() {
+		var self = this
+		if(this.props.count) {
 			fetch(`https://baconipsum.com/api/?type=all-meat&sentences=${this.props.count}`)
-				.then(res => res.json())
-				.then(data => data[0].split('. ').foreach())
+				.then(response => response.json())
+				.then(json => json[0]
+								.split('. ')
+								.forEach(sentence => self.addNote(sentence.substring(0, 25))))
 		}
-		
-    }
+	}
+
+
 	addNote = (txt) => {
 		this.setState ( {
 			notes:[...this.state.notes, { id:uuid(), note:txt}]
@@ -41,13 +48,13 @@ class Board extends Component {
 			<div className="board">
 				{
 					this.state.notes.map(note => (
-						<Note 
-							key={note.id} 
-							index={note.id} 
-							note={note}
-							updateNote={this.updateNote}
-							deleteNote={this.deleteNote}
-						/>
+							<Note 
+								key={note.id} 
+								index={note.id} 
+								note={note}
+								updateNote={this.updateNote}
+								deleteNote={this.deleteNote}
+							/>
 					))
 				}
 				<button onClick ={() => this.addNote("New Note")} id="add"><FaPlusCircle /></button>
