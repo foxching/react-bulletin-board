@@ -2,7 +2,7 @@ import React, {Component }  from 'react'
 import { FaPen} from 'react-icons/fa';
 import { FaTrash } from 'react-icons/fa';
 import { FaSave } from 'react-icons/fa';
-import Draggable from 'react-draggable'
+
 
 
 class Note extends Component {
@@ -15,7 +15,7 @@ class Note extends Component {
 		this.style = {
 			right: this.randomBetween(0, window.innerWidth - 150, 'px'),
 			top: this.randomBetween(0, window.innerHeight - 150, 'px'),
-			transform: `rotate(${this.randomBetween(-25, 25, 'deg')})`
+		    transform: `rotate(${this.randomBetween(-25, 25, 'deg')})`
 		}
 	}
 
@@ -47,32 +47,25 @@ class Note extends Component {
     renderForm = () => {
 
         return (
-            
                 <div className="note" style={this.style}>
                     <form onSubmit={this.save}>
                         <textarea type="text" name="TextMessage" value={this.state.noteVal} onChange={this.onChange}/>
                         <button type="submit" id="save"><FaSave /></button>
                     </form>
                 </div>
-            
-
-
         );
     }
 
-    renderDisplay =() =>{
+    renderDisplay = () => {
 
         return ( 
-            <Draggable axis="both">
-            <div className="note" style={this.style}>
-                <p>{this.props.note.note}</p>
-                <span>
-                    <button id="edit" onClick={this.edit}><FaPen /></button>
-                    <button id="remove" onClick={this.remove}><FaTrash /></button>
-                </span>
-            </div>
-            </Draggable>
-        
+                <div className="note" style={this.style}>
+                    <p>{this.props.note.note}</p>
+                    <span>
+                        <button id="edit" onClick={this.edit}><FaPen /></button>
+                        <button id="remove" onClick={this.remove}><FaTrash /></button>
+                    </span>
+                </div>
         );
     }
 
@@ -81,5 +74,8 @@ class Note extends Component {
         return this.state.editing ? this.renderForm() : this.renderDisplay()
     }
 }
+
+
+
 
 export default Note
