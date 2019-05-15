@@ -2,7 +2,7 @@ import React, {Component }  from 'react'
 import Note from './Note'
 import {FaPlusCircle} from 'react-icons/fa'
 import uuid  from 'uuid'
-
+import Draggable from 'react-draggable'
 
 
 class Board extends Component {
@@ -48,13 +48,17 @@ class Board extends Component {
 			<div className="board">
 				{
 					this.state.notes.map(note => (
-							<Note 
-								key={note.id} 
-								index={note.id} 
-								note={note}
-								updateNote={this.updateNote}
-								deleteNote={this.deleteNote}
-							/>
+							<Draggable>
+								<div>
+								<Note 
+									key={note.id} 
+									index={note.id} 
+									note={note}
+									updateNote={this.updateNote}
+									deleteNote={this.deleteNote}
+								/>
+								</div>
+							</Draggable>
 					))
 				}
 				<button onClick ={() => this.addNote("New Note")} id="add"><FaPlusCircle /></button>

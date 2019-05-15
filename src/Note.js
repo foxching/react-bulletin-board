@@ -2,7 +2,7 @@ import React, {Component }  from 'react'
 import { FaPen} from 'react-icons/fa';
 import { FaTrash } from 'react-icons/fa';
 import { FaSave } from 'react-icons/fa';
-import Draggable from 'react-draggable'
+
 
 
 class Note extends Component {
@@ -47,7 +47,6 @@ class Note extends Component {
     renderForm = () => {
 
         return (
-            
                 <div className="note" style={this.style}>
                     <form onSubmit={this.save}>
                         <textarea type="text" name="TextMessage" value={this.state.noteVal} onChange={this.onChange}/>
@@ -61,24 +60,22 @@ class Note extends Component {
     }
 
     renderDisplay =() =>{
-
-        return ( 
-            <Draggable axis="both">
-            <div className="note" style={this.style}>
-                <p>{this.props.note.note}</p>
-                <span>
-                    <button id="edit" onClick={this.edit}><FaPen /></button>
-                    <button id="remove" onClick={this.remove}><FaTrash /></button>
-                </span>
-            </div>
-            </Draggable>
         
+        return ( 
+                    <div className="note" style={this.style}>
+                        <p>{this.props.note.note}</p>
+                        <span>
+                            <button id="edit" onClick={this.edit}><FaPen /></button>
+                            <button id="remove" onClick={this.remove}><FaTrash /></button>
+                        </span>
+                    </div>
         );
     }
 
     render(){
 
-        return this.state.editing ? this.renderForm() : this.renderDisplay()
+       return  this.state.editing ? this.renderForm() : this.renderDisplay()
+                
     }
 }
 
