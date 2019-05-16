@@ -49,7 +49,7 @@ class Board extends Component {
 				{
 					this.state.notes.map(note => (
 							<Draggable>
-								<div>
+							 <div>
 								<Note 
 									key={note.id} 
 									index={note.id} 
@@ -57,7 +57,7 @@ class Board extends Component {
 									updateNote={this.updateNote}
 									deleteNote={this.deleteNote}
 								/>
-								</div>
+							  </div>
 							</Draggable>
 					))
 				}

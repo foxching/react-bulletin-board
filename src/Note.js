@@ -8,7 +8,6 @@ import { FaSave } from 'react-icons/fa';
 class Note extends Component {
     state = {
         editing:false,
-        noteVal:this.props.note.note
     }
 
    componentWillMount() {
@@ -18,6 +17,20 @@ class Note extends Component {
 			transform: `rotate(${this.randomBetween(-25, 25, 'deg')})`
 		}
 	}
+
+   componentDidUpdate() {
+        let textArea
+        if(this.state.editing) {
+            textArea = this._newText
+            textArea.focus()
+            textArea.select()
+        }
+
+    }
+
+    shouldComponentUpdate(nextProps, nextState){
+        return this.props.note.note !== nextProps.note.note || this.state !== nextState
+    }
 
 	randomBetween(x, y, s) {
 		return x + Math.ceil(Math.random() * (y-x)) + s
@@ -29,27 +42,23 @@ class Note extends Component {
 
     save =(e) => {
         e.preventDefault();
-        const newText = e.target.elements.TextMessage.value
-        this.props.updateNote(newText, this.props.note)
+        this.props.updateNote(this._newText.value, this.props.note)
         this.setState({
             editing:false
         })
     }
 
     remove = () => {
-        this.props.deleteNote(this.props.note.id)
+        this.props.deleteNote(this.props.index)
     }
 
-    onChange =(e) => {
-        this.setState({ noteVal:e.target.value })
-    }
-    
+
     renderForm = () => {
 
         return (
                 <div className="note" style={this.style}>
                     <form onSubmit={this.save}>
-                        <textarea type="text" name="TextMessage" value={this.state.noteVal} onChange={this.onChange}/>
+                        <textarea type="text" ref={input => this._newText = input} defaultValue={this.props.note.note} onChange={this.onChange}/>
                         <button type="submit" id="save"><FaSave /></button>
                     </form>
                 </div>
@@ -59,7 +68,7 @@ class Note extends Component {
         );
     }
 
-    renderDisplay =() =>{
+    renderDisplay = () =>{
         
         return ( 
                     <div className="note" style={this.style}>
