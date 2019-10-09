@@ -1,9 +1,12 @@
-# A Bulletin Board App
+ 
+# <h1 align='center'>A Bulletin Board App</h1>
 
-A simple bulletin  application written in reactjs. [Version with Draggable features]
+<h3 align='center'> :clipboard: A simple bulletin  application written in reactjs.</h3>
 
 
-## Usage
+### Screenshot
+![light theme](https://github.com/foxching/bulletin-board/blob/master/public/images/screenshot.png)
+
 
 ### Installation
 
