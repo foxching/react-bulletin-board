@@ -1,5 +1,5 @@
  
-# <h1 align='center'>A Bulletin Board App</h1>
+ <h1 align='center'>A Bulletin Board App</h1>
 
 <h3 align='center'> :clipboard: A simple bulletin  application written in reactjs.</h3>
 
