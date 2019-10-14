@@ -13,7 +13,7 @@
 Install all the dependencies
 
 ```sh
-$ yarn create react-app my-app
+$ yarn install
 ```
 
 ### Serve
